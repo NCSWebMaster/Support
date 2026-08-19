@@ -42,9 +42,25 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6
 /* Monthly-only suffix — hidden in one-time giving mode */
 body.mode-onetime .mo-suffix{display:none;}
 
+/* Mode-swap — monthly/one-time text variants stacked in the same grid cell
+   so the container is always sized to the taller variant. Switching which
+   one is visible never changes layout height, so the page can't jump. */
+.mode-swap{display:grid;}
+.mode-swap-inline{display:inline-grid;}
+.mode-swap .mode-text,.mode-swap-inline .mode-text{grid-area:1/1;visibility:hidden;}
+.mode-swap .mode-text[data-mode="monthly"],.mode-swap-inline .mode-text[data-mode="monthly"]{visibility:visible;}
+body.mode-onetime .mode-swap .mode-text[data-mode="monthly"],
+body.mode-onetime .mode-swap-inline .mode-text[data-mode="monthly"]{visibility:hidden;}
+body.mode-onetime .mode-swap .mode-text[data-mode="onetime"],
+body.mode-onetime .mode-swap-inline .mode-text[data-mode="onetime"]{visibility:visible;}
+/* Beats existing display rules on these elements (higher specificity) so the grid stacking above actually applies */
+.page-header .eyebrow.mode-swap-inline,
+.custom-note .custom-link.mode-swap-inline,
+.closing-cta-btn.mode-swap-inline{display:inline-grid;}
+.modal-field label.mode-swap{display:grid;}
+
 @media(prefers-reduced-motion:reduce){
   .giving-toggle-thumb{transition:none;}
-  .staircase{transition:none;}
 }
 
 .page-header{text-align:center;padding:60px 6% 44px;background:linear-gradient(180deg,#fff 0%,#fdf6f2 100%);}
@@ -90,8 +106,7 @@ section{padding:70px 6%;}
 .giving-toggle .active{color:#fff;}
 
 /* THE STAIRCASE */
-.staircase{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:center;gap:22px;flex-wrap:nowrap;transition:opacity 0.18s ease;}
-.staircase.is-switching{opacity:0;}
+.staircase{max-width:1200px;margin:0 auto;display:flex;align-items:flex-end;justify-content:center;gap:22px;flex-wrap:nowrap;}
 .tier-card{
   flex:1;min-width:0;background:#fff;border:1px solid var(--grey-line);border-radius:12px;
   padding:26px 18px 24px;text-align:center;position:relative;
