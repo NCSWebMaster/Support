@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Give Monthly — Northridge Community School</title>
+<meta name="description" content="Become a monthly partner with Northridge Community School. Choose a giving tier from $50 to $1,000 a month and help keep NCS accessible, faith-centered, and thriving.">
+<link rel="stylesheet" href="css/styles.css?v=2">
+</head>
+<body>
+
+<nav class="mini-nav">
+  <a href="https://northridgecommunityschool.com/"><img src="assets/logo.png" alt="Northridge Community School"></a>
+  <a href="https://northridgecommunityschool.com/">← Back to northridgecommunityschool.com</a>
+</nav>
+
+<header class="page-header">
+  <span class="eyebrow">Give Monthly</span>
+  <h1>Grow With Us, Every Month</h1>
+  <p>A steady monthly gift lets NCS plan ahead — for teachers, for families who need help affording tuition, and for the everyday materials that make a Christ-centered classroom come alive.</p>
+  <div class="divider"></div>
+</header>
+
+<section class="why-section">
+  <div class="why-inner">
+    <span class="why-eyebrow">Why Give</span>
+
+    <p class="why-statement">Every family who walks through our doors is trusting us with something sacred — their child's <strong>heart, mind, and faith.</strong> Your gift is what makes that possible for the family who couldn't otherwise afford it.</p>
+    <div class="why-statement-rule"></div>
+
+    <div class="why-reasons">
+      <div class="why-reason">
+        <h3>No child is turned away for cost</h3>
+        <p>Every year, families who love what NCS stands for still can't cover full tuition. Monthly gifts are what let us say yes to them anyway.</p>
+      </div>
+      <div class="why-reason">
+        <h3>Small classes stay small</h3>
+        <p>Individual attention isn't free — it's a deliberate choice that only holds together when giving fills the gap tuition alone doesn't cover.</p>
+      </div>
+      <div class="why-reason">
+        <h3>Faith stays at the center</h3>
+        <p>Chapel, prayer, and character formation aren't add-ons here. They're the reason NCS exists — and the reason so many families choose us.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ladder-section" id="tiers">
+
+  <div class="giving-toggle">
+    <span class="active">Monthly</span>
+    <a href="https://northridgecommunityschool.com/index.html#donate">One-Time</a>
+  </div>
+
+  <div class="staircase-wrap">
+    <div class="staircase">
+
+      <div class="tier-card" data-step="1">
+        <div class="tier-name">Friend</div>
+        <div class="tier-amount">$50<span>/mo</span></div>
+        <div class="tier-impact">A month of art &amp; enrichment supplies for one classroom</div>
+        <button class="tier-cta" data-amount-cents="5000">Give $50/mo</button>
+      </div>
+
+      <div class="tier-card" data-step="2">
+        <div class="tier-name">Partner</div>
+        <div class="tier-amount">$100<span>/mo</span></div>
+        <div class="tier-impact">A week of chapel &amp; spiritual formation materials</div>
+        <button class="tier-cta" data-amount-cents="10000">Give $100/mo</button>
+      </div>
+
+      <div class="tier-card featured" data-step="3">
+        <span class="tier-ribbon">Most Chosen</span>
+        <div class="tier-name">Steward</div>
+        <div class="tier-amount">$250<span>/mo</span></div>
+        <div class="tier-impact">Partial tuition assistance for a family in need</div>
+        <button class="tier-cta" data-amount-cents="25000">Give $250/mo</button>
+      </div>
+
+      <div class="tier-card" data-step="4">
+        <div class="tier-name">Patron</div>
+        <div class="tier-amount">$500<span>/mo</span></div>
+        <div class="tier-impact">A teacher's full classroom budget for one term</div>
+        <button class="tier-cta" data-amount-cents="50000">Give $500/mo</button>
+      </div>
+
+      <div class="tier-card" data-step="5">
+        <div class="tier-name">Legacy Circle</div>
+        <div class="tier-amount">$1,000<span>/mo</span></div>
+        <div class="tier-impact">Full year of tuition for one elementary student</div>
+        <button class="tier-cta" data-amount-cents="100000">Give $1,000/mo</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="custom-note">
+    <p>Want to give a different monthly amount?</p>
+    <button type="button" class="custom-link" id="customAmountLink">Set a custom monthly gift →</button>
+  </div>
+
+</section>
+
+<section class="closing-cta">
+  <div class="closing-cta-inner">
+    <h2>Everyday at NCS a child is growing in mind, character, and faith. <strong>Your gift can help that story keep going.</strong></h2>
+    <p>A monthly gift, whatever the amount, is a quiet promise to keep this place standing for the next family who needs it.</p>
+    <button class="closing-cta-btn" type="button" id="closingCtaBtn">Start Your Monthly Gift</button>
+  </div>
+</section>
+
+<section class="ladder-section" style="padding-top:0;padding-bottom:48px;">
+  <p class="tax-note" style="margin-top:0;border-top:none;padding-top:0;">Northridge Community School is a 501(c)(3) nonprofit (EIN 95-4379646). Your monthly gift is tax-deductible and can be updated or canceled anytime.</p>
+</section>
+
+<footer>
+  Questions about giving? Email <a href="mailto:office@northridgecommunityschool.com">office@northridgecommunityschool.com</a>
+</footer>
+
+<!-- Custom monthly amount modal -->
+<div class="modal-overlay" id="customModalOverlay">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="customModalTitle">
+    <button type="button" class="modal-close" id="customModalClose" aria-label="Close">&times;</button>
+    <h3 id="customModalTitle">Set Your Monthly Gift</h3>
+    <p class="modal-sub">Choose any amount that's right for your family.</p>
+    <form id="customAmountForm">
+      <div class="modal-field">
+        <label for="customAmountInput">Monthly amount</label>
+        <div class="modal-amount-wrap">
+          <span>$</span>
+          <input type="number" id="customAmountInput" inputmode="decimal" min="1" max="10000" step="1" placeholder="75" required>
+          <span>/mo</span>
+        </div>
+        <p class="modal-hint">Minimum $1, maximum $10,000 per month.</p>
+        <p class="modal-error" id="customAmountError"></p>
+      </div>
+      <button type="submit" class="modal-submit">Continue to Secure Checkout</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/script.js?v=1"></script>
+</body>
+</html>
