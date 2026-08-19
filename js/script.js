@@ -66,18 +66,32 @@
     }
 
     // Monthly / One-Time giving mode toggle
+    var togglePill = document.querySelector(".giving-toggle");
     var toggleButtons = document.querySelectorAll(".giving-toggle [data-mode]");
     var modeTextEls = document.querySelectorAll("[data-monthly][data-onetime]");
+    var staircase = document.querySelector(".staircase");
 
     function applyMode(mode) {
+      if (mode === givingMode) return;
       givingMode = mode;
       document.body.classList.toggle("mode-onetime", mode === "onetime");
+      if (togglePill) togglePill.classList.toggle("is-onetime", mode === "onetime");
       toggleButtons.forEach(function (btn) {
         btn.classList.toggle("active", btn.getAttribute("data-mode") === mode);
       });
-      modeTextEls.forEach(function (el) {
-        el.textContent = mode === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-onetime");
-      });
+      if (staircase) {
+        staircase.classList.add("is-switching");
+        setTimeout(function () {
+          modeTextEls.forEach(function (el) {
+            el.textContent = mode === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-onetime");
+          });
+          staircase.classList.remove("is-switching");
+        }, 180);
+      } else {
+        modeTextEls.forEach(function (el) {
+          el.textContent = mode === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-onetime");
+        });
+      }
     }
 
     toggleButtons.forEach(function (btn) {
