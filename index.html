@@ -3,21 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Give Monthly — Northridge Community School</title>
-<meta name="description" content="Become a monthly partner with Northridge Community School. Choose a giving tier from $50 to $1,000 a month and help keep NCS accessible, faith-centered, and thriving.">
-<link rel="stylesheet" href="css/styles.css?v=2">
+<title>Give — Northridge Community School</title>
+<meta name="description" content="Support Northridge Community School with a monthly or one-time gift. Choose a giving tier from $50 to $1,000 and help keep NCS accessible, faith-centered, and thriving.">
+<link rel="stylesheet" href="css/styles.css?v=3">
+<style>
+.brand-name{font-size:1.25rem;color:#C8102E;font-weight:700;}
+@media(max-width:900px){
+  .brand-name::after{content:"NCS";}
+  .brand-name-text{display:none;}
+}
+</style>
 </head>
 <body>
 
-<nav class="mini-nav">
-  <a href="https://northridgecommunityschool.com/"><img src="assets/logo.png" alt="Northridge Community School"></a>
-  <a href="https://northridgecommunityschool.com/">← Back to northridgecommunityschool.com</a>
+<nav>
+  <a href="https://northridgecommunityschool.com/" class="brand">
+    <img src="assets/logo.png" alt="NCS Crest">
+    <span class="brand-name"><span class="brand-name-text">Northridge Community School</span></span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="https://northridgecommunityschool.com/">Home</a></li>
+    <li><a href="https://northridgecommunityschool.com/about.html">About</a></li>
+    <li><a href="https://northridgecommunityschool.com/admissions.html">Admissions</a></li>
+    <li><a href="index.html" class="active">Give</a></li>
+  </ul>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <header class="page-header">
-  <span class="eyebrow">Give Monthly</span>
-  <h1>Grow With Us, Every Month</h1>
-  <p>A steady monthly gift lets NCS plan ahead — for teachers, for families who need help affording tuition, and for the everyday materials that make a Christ-centered classroom come alive.</p>
+  <span class="eyebrow" data-monthly="Give Monthly" data-onetime="Give Once">Give Monthly</span>
+  <h1 data-monthly="Grow With Us, Every Month" data-onetime="Make a Gift Today">Grow With Us, Every Month</h1>
+  <p data-monthly="A steady monthly gift lets NCS plan ahead — for teachers, for families who need help affording tuition, and for the everyday materials that make a Christ-centered classroom come alive." data-onetime="A one-time gift, of any size, goes straight to work — for teachers, for families who need help affording tuition, and for the everyday materials that make a Christ-centered classroom come alive.">A steady monthly gift lets NCS plan ahead — for teachers, for families who need help affording tuition, and for the everyday materials that make a Christ-centered classroom come alive.</p>
   <div class="divider"></div>
 </header>
 
@@ -31,7 +49,7 @@
     <div class="why-reasons">
       <div class="why-reason">
         <h3>No child is turned away for cost</h3>
-        <p>Every year, families who love what NCS stands for still can't cover full tuition. Monthly gifts are what let us say yes to them anyway.</p>
+        <p>Every year, families who love what NCS stands for still can't cover full tuition. Gifts like yours are what let us say yes to them anyway.</p>
       </div>
       <div class="why-reason">
         <h3>Small classes stay small</h3>
@@ -48,8 +66,8 @@
 <section class="ladder-section" id="tiers">
 
   <div class="giving-toggle">
-    <span class="active">Monthly</span>
-    <a href="https://northridgecommunityschool.com/index.html#donate">One-Time</a>
+    <button type="button" class="active" id="toggleMonthly" data-mode="monthly">Monthly</button>
+    <button type="button" id="toggleOnetime" data-mode="onetime">One-Time</button>
   </div>
 
   <div class="staircase-wrap">
@@ -57,46 +75,46 @@
 
       <div class="tier-card" data-step="1">
         <div class="tier-name">Friend</div>
-        <div class="tier-amount">$50<span>/mo</span></div>
+        <div class="tier-amount">$50<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A month of art &amp; enrichment supplies for one classroom</div>
-        <button class="tier-cta" data-amount-cents="5000">Give $50/mo</button>
+        <button class="tier-cta" data-amount-cents="5000">Give $50<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="2">
         <div class="tier-name">Partner</div>
-        <div class="tier-amount">$100<span>/mo</span></div>
+        <div class="tier-amount">$100<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A week of chapel &amp; spiritual formation materials</div>
-        <button class="tier-cta" data-amount-cents="10000">Give $100/mo</button>
+        <button class="tier-cta" data-amount-cents="10000">Give $100<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card featured" data-step="3">
         <span class="tier-ribbon">Most Chosen</span>
         <div class="tier-name">Steward</div>
-        <div class="tier-amount">$250<span>/mo</span></div>
+        <div class="tier-amount">$250<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">Partial tuition assistance for a family in need</div>
-        <button class="tier-cta" data-amount-cents="25000">Give $250/mo</button>
+        <button class="tier-cta" data-amount-cents="25000">Give $250<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="4">
         <div class="tier-name">Patron</div>
-        <div class="tier-amount">$500<span>/mo</span></div>
+        <div class="tier-amount">$500<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A teacher's full classroom budget for one term</div>
-        <button class="tier-cta" data-amount-cents="50000">Give $500/mo</button>
+        <button class="tier-cta" data-amount-cents="50000">Give $500<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="5">
         <div class="tier-name">Legacy Circle</div>
-        <div class="tier-amount">$1,000<span>/mo</span></div>
+        <div class="tier-amount">$1,000<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">Full year of tuition for one elementary student</div>
-        <button class="tier-cta" data-amount-cents="100000">Give $1,000/mo</button>
+        <button class="tier-cta" data-amount-cents="100000">Give $1,000<span class="mo-suffix">/mo</span></button>
       </div>
 
     </div>
   </div>
 
   <div class="custom-note">
-    <p>Want to give a different monthly amount?</p>
-    <button type="button" class="custom-link" id="customAmountLink">Set a custom monthly gift →</button>
+    <p data-monthly="Want to give a different monthly amount?" data-onetime="Want to give a different amount?">Want to give a different monthly amount?</p>
+    <button type="button" class="custom-link" id="customAmountLink" data-monthly="Set a custom monthly gift →" data-onetime="Set a custom gift →">Set a custom monthly gift →</button>
   </div>
 
 </section>
@@ -104,34 +122,34 @@
 <section class="closing-cta">
   <div class="closing-cta-inner">
     <h2>Everyday at NCS a child is growing in mind, character, and faith. <strong>Your gift can help that story keep going.</strong></h2>
-    <p>A monthly gift, whatever the amount, is a quiet promise to keep this place standing for the next family who needs it.</p>
-    <button class="closing-cta-btn" type="button" id="closingCtaBtn">Start Your Monthly Gift</button>
+    <p data-monthly="A monthly gift, whatever the amount, is a quiet promise to keep this place standing for the next family who needs it." data-onetime="A gift today, whatever the amount, helps keep this place standing for the next family who needs it.">A monthly gift, whatever the amount, is a quiet promise to keep this place standing for the next family who needs it.</p>
+    <button class="closing-cta-btn" type="button" id="closingCtaBtn" data-monthly="Start Your Monthly Gift" data-onetime="Give Now">Start Your Monthly Gift</button>
   </div>
 </section>
 
 <section class="ladder-section" style="padding-top:0;padding-bottom:48px;">
-  <p class="tax-note" style="margin-top:0;border-top:none;padding-top:0;">Northridge Community School is a 501(c)(3) nonprofit (EIN 95-4379646). Your monthly gift is tax-deductible and can be updated or canceled anytime.</p>
+  <p class="tax-note" style="margin-top:0;border-top:none;padding-top:0;" data-monthly="Northridge Community School is a 501(c)(3) nonprofit (EIN 95-4379646). Your monthly gift is tax-deductible and can be updated or canceled anytime." data-onetime="Northridge Community School is a 501(c)(3) nonprofit (EIN 95-4379646). Your gift is tax-deductible.">Northridge Community School is a 501(c)(3) nonprofit (EIN 95-4379646). Your monthly gift is tax-deductible and can be updated or canceled anytime.</p>
 </section>
 
 <footer>
   Questions about giving? Email <a href="mailto:office@northridgecommunityschool.com">office@northridgecommunityschool.com</a>
 </footer>
 
-<!-- Custom monthly amount modal -->
+<!-- Custom amount modal -->
 <div class="modal-overlay" id="customModalOverlay">
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="customModalTitle">
     <button type="button" class="modal-close" id="customModalClose" aria-label="Close">&times;</button>
-    <h3 id="customModalTitle">Set Your Monthly Gift</h3>
-    <p class="modal-sub">Choose any amount that's right for your family.</p>
+    <h3 id="customModalTitle" data-monthly="Set Your Monthly Gift" data-onetime="Set Your Gift Amount">Set Your Monthly Gift</h3>
+    <p class="modal-sub" data-monthly="Choose any amount that's right for your family." data-onetime="Choose any amount that's right for your family.">Choose any amount that's right for your family.</p>
     <form id="customAmountForm">
       <div class="modal-field">
-        <label for="customAmountInput">Monthly amount</label>
+        <label for="customAmountInput" data-monthly="Monthly amount" data-onetime="Gift amount">Monthly amount</label>
         <div class="modal-amount-wrap">
           <span>$</span>
           <input type="number" id="customAmountInput" inputmode="decimal" min="1" max="10000" step="1" placeholder="75" required>
-          <span>/mo</span>
+          <span class="mo-suffix">/mo</span>
         </div>
-        <p class="modal-hint">Minimum $1, maximum $10,000 per month.</p>
+        <p class="modal-hint" data-monthly="Minimum $1, maximum $10,000 per month." data-onetime="Minimum $1, maximum $10,000.">Minimum $1, maximum $10,000 per month.</p>
         <p class="modal-error" id="customAmountError"></p>
       </div>
       <button type="submit" class="modal-submit">Continue to Secure Checkout</button>
@@ -139,6 +157,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=1"></script>
+<script src="js/script.js?v=2"></script>
 </body>
 </html>
