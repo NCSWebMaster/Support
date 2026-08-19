@@ -13,11 +13,34 @@ a{color:inherit;}
 button{font-family:inherit;}
 :focus-visible{outline:3px solid var(--bronze);outline-offset:2px;}
 
-/* MINI NAV — just a way back to the main site, this is a single-purpose page */
-.mini-nav{display:flex;align-items:center;justify-content:center;gap:12px;padding:14px 6%;border-bottom:1px solid var(--grey-line);}
-.mini-nav img{height:42px;width:auto;flex-shrink:0;}
-.mini-nav a{text-decoration:none;color:var(--bronze);font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.3px;}
-.mini-nav a:hover{text-decoration:underline;}
+/* NAV */
+nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6%;background:#fff;border-bottom:1px solid var(--grey-line);position:sticky;top:0;z-index:100;}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.brand:hover span{text-decoration:underline;}
+.brand img{height:48px;}
+.nav-links{display:flex;gap:24px;list-style:none;align-items:center;flex-wrap:nowrap;}
+.nav-links a{text-decoration:none;color:var(--ink);font-family:'Trebuchet MS',sans-serif;font-size:0.88rem;font-weight:600;transition:color 0.2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--red);}
+.menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+.menu-toggle span{display:block;width:24px;height:3px;background:var(--red);border-radius:2px;transition:transform 0.2s,opacity 0.2s;}
+.menu-toggle.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
+.menu-toggle.open span:nth-child(2){opacity:0;}
+.menu-toggle.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+
+@media(max-width:900px){
+  .menu-toggle{display:flex;}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:#fff;border-bottom:1px solid var(--grey-line);padding:8px 6% 16px;gap:0;box-shadow:0 8px 16px rgba(0,0,0,0.05);}
+  .nav-links.open{display:flex;}
+  .nav-links li{border-top:1px solid var(--grey-line);}
+  .nav-links a{display:block;padding:14px 4px;font-size:1.05rem;}
+}
+@media(max-width:600px){
+  nav{padding:14px 5%;}
+  .brand img{height:40px;}
+}
+
+/* Monthly-only suffix — hidden in one-time giving mode */
+body.mode-onetime .mo-suffix{display:none;}
 
 .page-header{text-align:center;padding:60px 6% 44px;background:linear-gradient(180deg,#fff 0%,#fdf6f2 100%);}
 .page-header .eyebrow{display:inline-block;color:var(--bronze);font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}

@@ -4,6 +4,7 @@
   var CHECKOUT_ENDPOINT = "https://eqgzfrzokhowpedderrb.supabase.co/functions/v1/create-donation-checkout";
   var MIN_DOLLARS = 1;
   var MAX_DOLLARS = 10000;
+  var givingMode = "monthly";
 
   function setButtonsBusy(busy) {
     var buttons = document.querySelectorAll(".tier-cta, .closing-cta-btn, .modal-submit");
@@ -13,7 +14,7 @@
   }
 
   function startCheckout(amountCents, triggerBtn) {
-    var originalText = triggerBtn ? triggerBtn.textContent : null;
+    var originalHTML = triggerBtn ? triggerBtn.innerHTML : null;
     setButtonsBusy(true);
     if (triggerBtn) triggerBtn.textContent = "Redirecting…";
 
@@ -22,7 +23,7 @@
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         amount_cents: amountCents,
-        recurring: true,
+        recurring: givingMode === "monthly",
         site: "support",
       }),
     })
@@ -38,7 +39,7 @@
       })
       .catch(function () {
         setButtonsBusy(false);
-        if (triggerBtn && originalText) triggerBtn.textContent = originalText;
+        if (triggerBtn && originalHTML) triggerBtn.innerHTML = originalHTML;
         window.alert(
           "Something went wrong starting your gift. Please try again, or email office@northridgecommunityschool.com and we'll help you directly."
         );
@@ -46,6 +47,45 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    // Mobile nav toggle
+    var menuToggle = document.getElementById("menuToggle");
+    var navLinks = document.getElementById("navLinks");
+    if (menuToggle && navLinks) {
+      menuToggle.addEventListener("click", function () {
+        var isOpen = navLinks.classList.toggle("open");
+        menuToggle.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", isOpen);
+      });
+      navLinks.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          navLinks.classList.remove("open");
+          menuToggle.classList.remove("open");
+          menuToggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+
+    // Monthly / One-Time giving mode toggle
+    var toggleButtons = document.querySelectorAll(".giving-toggle [data-mode]");
+    var modeTextEls = document.querySelectorAll("[data-monthly][data-onetime]");
+
+    function applyMode(mode) {
+      givingMode = mode;
+      document.body.classList.toggle("mode-onetime", mode === "onetime");
+      toggleButtons.forEach(function (btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-mode") === mode);
+      });
+      modeTextEls.forEach(function (el) {
+        el.textContent = mode === "monthly" ? el.getAttribute("data-monthly") : el.getAttribute("data-onetime");
+      });
+    }
+
+    toggleButtons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        applyMode(btn.getAttribute("data-mode"));
+      });
+    });
+
     // Tier buttons
     document.querySelectorAll(".tier-cta").forEach(function (btn) {
       btn.addEventListener("click", function () {
@@ -64,7 +104,7 @@
       });
     }
 
-    // Custom monthly amount modal
+    // Custom amount modal
     var overlay = document.getElementById("customModalOverlay");
     var openLink = document.getElementById("customAmountLink");
     var closeBtn = document.getElementById("customModalClose");
