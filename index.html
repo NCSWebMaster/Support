@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Give — Northridge Community School</title>
 <meta name="description" content="Support Northridge Community School with a monthly or one-time gift. Choose a giving tier from $50 to $1,000 and help keep NCS accessible, faith-centered, and thriving.">
-<link rel="stylesheet" href="css/styles.css?v=3">
+<link rel="stylesheet" href="css/styles.css?v=4">
 <style>
 .brand-name{font-size:1.25rem;color:#C8102E;font-weight:700;}
 @media(max-width:900px){
@@ -66,6 +66,7 @@
 <section class="ladder-section" id="tiers">
 
   <div class="giving-toggle">
+    <div class="giving-toggle-thumb" aria-hidden="true"></div>
     <button type="button" class="active" id="toggleMonthly" data-mode="monthly">Monthly</button>
     <button type="button" id="toggleOnetime" data-mode="onetime">One-Time</button>
   </div>
@@ -74,14 +75,14 @@
     <div class="staircase">
 
       <div class="tier-card" data-step="1">
-        <div class="tier-name">Friend</div>
+        <div class="tier-name" data-monthly="Friend" data-onetime="One-Time">Friend</div>
         <div class="tier-amount">$50<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A month of art &amp; enrichment supplies for one classroom</div>
         <button class="tier-cta" data-amount-cents="5000">Give $50<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="2">
-        <div class="tier-name">Partner</div>
+        <div class="tier-name" data-monthly="Partner" data-onetime="One-Time">Partner</div>
         <div class="tier-amount">$100<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A week of chapel &amp; spiritual formation materials</div>
         <button class="tier-cta" data-amount-cents="10000">Give $100<span class="mo-suffix">/mo</span></button>
@@ -89,21 +90,21 @@
 
       <div class="tier-card featured" data-step="3">
         <span class="tier-ribbon">Most Chosen</span>
-        <div class="tier-name">Steward</div>
+        <div class="tier-name" data-monthly="Steward" data-onetime="One-Time">Steward</div>
         <div class="tier-amount">$250<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">Partial tuition assistance for a family in need</div>
         <button class="tier-cta" data-amount-cents="25000">Give $250<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="4">
-        <div class="tier-name">Patron</div>
+        <div class="tier-name" data-monthly="Patron" data-onetime="One-Time">Patron</div>
         <div class="tier-amount">$500<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">A teacher's full classroom budget for one term</div>
         <button class="tier-cta" data-amount-cents="50000">Give $500<span class="mo-suffix">/mo</span></button>
       </div>
 
       <div class="tier-card" data-step="5">
-        <div class="tier-name">Legacy Circle</div>
+        <div class="tier-name" data-monthly="Legacy Circle" data-onetime="One-Time">Legacy Circle</div>
         <div class="tier-amount">$1,000<span class="mo-suffix">/mo</span></div>
         <div class="tier-impact">Full year of tuition for one elementary student</div>
         <button class="tier-cta" data-amount-cents="100000">Give $1,000<span class="mo-suffix">/mo</span></button>
@@ -157,6 +158,6 @@
   </div>
 </div>
 
-<script src="js/script.js?v=2"></script>
+<script src="js/script.js?v=3"></script>
 </body>
 </html>
