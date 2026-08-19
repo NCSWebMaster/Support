@@ -2,6 +2,8 @@
   --red:#C8102E;
   --bronze:#B07D4F;
   --bronze-light:#D9B48F;
+  --gold:#D4AF37;
+  --gold-dark:#B8952C;
   --ink:#3A2E2A;
   --grey-line:#E6E1DC;
 }
@@ -121,9 +123,22 @@ section{padding:70px 6%;}
 .tier-card[data-step="5"]{margin-bottom:56px;}
 
 .tier-card.featured{border-color:var(--red);box-shadow:0 8px 20px rgba(200,16,46,0.14);}
-.tier-card.legacy{border-color:var(--bronze);box-shadow:0 8px 20px rgba(176,125,79,0.2);}
 .tier-ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:'Trebuchet MS',sans-serif;font-size:0.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 14px;border-radius:12px;white-space:nowrap;}
-.tier-ribbon.bronze{background:var(--bronze);}
+.tier-ribbon.gold{background:var(--gold);color:var(--ink);}
+
+/* Legacy Circle ($1,000) — gold highlight, monthly giving only. In one-time
+   mode it reverts to a regular card (see body.mode-onetime overrides below). */
+.tier-card.legacy{border-color:var(--gold);box-shadow:0 10px 26px rgba(212,175,55,0.4);}
+.tier-card.legacy .tier-cta{background:var(--gold);color:var(--ink);}
+.tier-card.legacy .tier-cta:hover{background:var(--gold-dark);}
+/* Reserve the same height as every other card's tier-name — the "Legacy Circle"
+   label is never shown here (the ribbon carries it), keeping card height equal */
+.tier-card.legacy .tier-name .mode-text[data-mode="monthly"]{visibility:hidden;}
+
+body.mode-onetime .tier-card.legacy{border-color:var(--grey-line);box-shadow:0 3px 12px rgba(0,0,0,0.05);}
+body.mode-onetime .tier-card.legacy .tier-cta{background:var(--bronze);color:#fff;}
+body.mode-onetime .tier-card.legacy .tier-cta:hover{background:#96663d;}
+body.mode-onetime .tier-card.legacy .tier-ribbon{display:none;}
 
 .tier-name{font-family:'Trebuchet MS',sans-serif;font-weight:700;color:var(--bronze);font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;margin-top:4px;}
 .tier-amount{font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:2rem;color:var(--red);line-height:1;margin-bottom:4px;}
