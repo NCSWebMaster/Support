@@ -5,6 +5,7 @@
   var MIN_DOLLARS = 1;
   var MAX_DOLLARS = 10000;
   var givingMode = "monthly";
+  var FUND = document.body.getAttribute("data-fund") || "general";
 
   function setButtonsBusy(busy) {
     var buttons = document.querySelectorAll(".tier-cta, .closing-cta-btn, .modal-submit");
@@ -25,6 +26,7 @@
         amount_cents: amountCents,
         recurring: givingMode === "monthly",
         site: "support",
+        fund: FUND,
       }),
     })
       .then(function (res) {
