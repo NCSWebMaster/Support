@@ -1,11 +1,31 @@
 (function () {
   "use strict";
 
-  var CHECKOUT_ENDPOINT = "https://eqgzfrzokhowpedderrb.supabase.co/functions/v1/create-donation-checkout";
+  var SUPABASE_URL = "https://eqgzfrzokhowpedderrb.supabase.co";
+  var SUPABASE_ANON_KEY =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVxZ3pmcnpva2hvd3BlZGRlcnJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2MjU4ODIsImV4cCI6MjA5NzIwMTg4Mn0.r94X0ZGSdAO_vtd4dXQKmjdVFtPZ7wSpYeUVzPAkjJo";
+  var CHECKOUT_ENDPOINT = SUPABASE_URL + "/functions/v1/create-donation-checkout";
   var MIN_DOLLARS = 1;
   var MAX_DOLLARS = 10000;
   var givingMode = "monthly";
   var FUND = document.body.getAttribute("data-fund") || "general";
+
+  // Eases a number from 0 up to targetCents (rendered as a dollar figure)
+  // over ~1.2s. Used by the campaign thermometer.
+  function animateCountUp(el, targetCents) {
+    if (!el) return;
+    var targetDollars = targetCents / 100;
+    var duration = 1200;
+    var start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = "$" + Math.round(eased * targetDollars).toLocaleString("en-US");
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
 
   function setButtonsBusy(busy) {
     var buttons = document.querySelectorAll(".tier-cta, .closing-cta-btn, .modal-submit");
@@ -65,6 +85,58 @@
           menuToggle.setAttribute("aria-expanded", "false");
         });
       });
+    }
+
+    // Fund toggle entrance slide — the toggle's "position" is baked into the
+    // HTML per page (see .pos-2/.pos-3 in styles.css) so it still works with
+    // JS disabled, but that means there's nothing to transition from on a
+    // fresh page load. Momentarily reset to rest position 1, force a reflow,
+    // then reapply the real position so the CSS transition actually plays.
+    var fundToggle = document.querySelector(".fund-toggle");
+    if (fundToggle) {
+      var posMatch = fundToggle.className.match(/pos-\d/);
+      if (posMatch) {
+        var posClass = posMatch[0];
+        var activeFundLink = fundToggle.querySelector("a.active");
+        fundToggle.classList.remove(posClass);
+        if (activeFundLink) activeFundLink.classList.remove("active");
+        void fundToggle.offsetWidth; // force reflow so the removal actually paints
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            fundToggle.classList.add(posClass);
+            if (activeFundLink) activeFundLink.classList.add("active");
+          });
+        });
+      }
+    }
+
+    // Campaign thermometer — reads the live total from the public
+    // campaign_progress view (aggregated, no donor data) and animates the
+    // fill + counted-up dollar figure in.
+    var thermometer = document.getElementById("campaignThermometer");
+    if (thermometer) {
+      var goalCents = parseInt(thermometer.getAttribute("data-goal-cents"), 10) || 0;
+      var fillEl = document.getElementById("thermometerFill");
+      var raisedEl = document.getElementById("thermometerRaised");
+
+      fetch(
+        SUPABASE_URL + "/rest/v1/campaign_progress?fund=eq." + encodeURIComponent(FUND) + "&select=raised_cents",
+        { headers: { apikey: SUPABASE_ANON_KEY, Authorization: "Bearer " + SUPABASE_ANON_KEY } }
+      )
+        .then(function (res) {
+          return res.ok ? res.json() : [];
+        })
+        .then(function (rows) {
+          var raisedCents = rows && rows[0] ? rows[0].raised_cents : 0;
+          var pct = goalCents > 0 ? Math.min(100, (raisedCents / goalCents) * 100) : 0;
+          requestAnimationFrame(function () {
+            if (fillEl) fillEl.style.width = pct + "%";
+          });
+          animateCountUp(raisedEl, raisedCents);
+        })
+        .catch(function () {
+          // Fail quietly — the thermometer just stays at $0 if this fetch fails.
+        });
     }
 
     // Monthly / One-Time giving mode toggle. Monthly/one-time text pairs live
