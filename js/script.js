@@ -87,29 +87,6 @@
       });
     }
 
-    // Fund toggle entrance slide — the toggle's "position" is baked into the
-    // HTML per page (see .pos-2/.pos-3 in styles.css) so it still works with
-    // JS disabled, but that means there's nothing to transition from on a
-    // fresh page load. Momentarily reset to rest position 1, force a reflow,
-    // then reapply the real position so the CSS transition actually plays.
-    var fundToggle = document.querySelector(".fund-toggle");
-    if (fundToggle) {
-      var posMatch = fundToggle.className.match(/pos-\d/);
-      if (posMatch) {
-        var posClass = posMatch[0];
-        var activeFundLink = fundToggle.querySelector("a.active");
-        fundToggle.classList.remove(posClass);
-        if (activeFundLink) activeFundLink.classList.remove("active");
-        void fundToggle.offsetWidth; // force reflow so the removal actually paints
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            fundToggle.classList.add(posClass);
-            if (activeFundLink) activeFundLink.classList.add("active");
-          });
-        });
-      }
-    }
-
     // Campaign thermometer — reads the live total from the public
     // campaign_progress view (aggregated, no donor data) and animates the
     // fill + counted-up dollar figure in.

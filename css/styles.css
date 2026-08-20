@@ -46,7 +46,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6
    fixed per page load (there's no live JS state — each option is a
    real page) via a .pos-2/.pos-3 modifier on the container. */
 .fund-toggle{position:relative;display:flex;flex-wrap:nowrap;justify-content:center;gap:0;max-width:480px;margin:20px auto 0;background:#fdf6f2;border:1.5px solid var(--grey-line);border-radius:30px;padding:4px;}
-.fund-toggle-thumb{position:absolute;top:4px;left:4px;width:calc(33.333% - 2.667px);height:calc(100% - 8px);background:var(--red);border-radius:24px;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);z-index:0;}
+.fund-toggle-thumb{position:absolute;top:4px;left:4px;width:calc(33.333% - 2.667px);height:calc(100% - 8px);background:var(--red);border-radius:24px;transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);z-index:0;}
 .fund-toggle.pos-2 .fund-toggle-thumb{transform:translateX(100%);}
 .fund-toggle.pos-3 .fund-toggle-thumb{transform:translateX(200%);}
 .fund-toggle a{position:relative;z-index:1;flex:1;min-width:0;border:none;background:none;padding:9px 10px;border-radius:24px;font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.2px;color:var(--bronze);cursor:pointer;transition:color 0.25s ease;text-align:center;text-decoration:none;line-height:1.25;}
@@ -141,7 +141,7 @@ section{padding:70px 6%;}
 
 /* One-time / monthly toggle pill */
 .giving-toggle{position:relative;display:flex;justify-content:center;gap:0;max-width:280px;margin:0 auto 56px;background:#fdf6f2;border:1.5px solid var(--grey-line);border-radius:30px;padding:4px;}
-.giving-toggle-thumb{position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);background:var(--red);border-radius:24px;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);z-index:0;}
+.giving-toggle-thumb{position:absolute;top:4px;left:4px;width:calc(50% - 4px);height:calc(100% - 8px);background:var(--red);border-radius:24px;transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);z-index:0;}
 .giving-toggle.is-onetime .giving-toggle-thumb{transform:translateX(100%);}
 .giving-toggle button,.giving-toggle a{position:relative;z-index:1;flex:1;border:none;background:none;padding:10px 18px;border-radius:24px;font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.85rem;color:var(--bronze);cursor:pointer;transition:color 0.25s ease;text-align:center;text-decoration:none;display:block;}
 .giving-toggle .active{color:#fff;}
