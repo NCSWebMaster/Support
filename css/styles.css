@@ -41,6 +41,16 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6
   .brand img{height:40px;}
 }
 
+/* FUND TOGGLE — General Fund / Teacher Support / Student Support */
+.fund-toggle{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:640px;margin:20px auto 0;padding:0 6%;}
+.fund-toggle a{border:1.5px solid var(--grey-line);background:#fdf6f2;color:var(--bronze);font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.3px;padding:9px 20px;border-radius:24px;text-decoration:none;transition:background 0.2s,color 0.2s,border-color 0.2s;white-space:nowrap;}
+.fund-toggle a:hover{border-color:var(--bronze-light);}
+.fund-toggle a.active{background:var(--red);border-color:var(--red);color:#fff;}
+@media(max-width:640px){
+  .fund-toggle{gap:6px;}
+  .fund-toggle a{padding:8px 14px;font-size:0.75rem;}
+}
+
 /* Monthly-only suffix — hidden in one-time giving mode */
 body.mode-onetime .mo-suffix{display:none;}
 
