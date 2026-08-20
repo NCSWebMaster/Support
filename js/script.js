@@ -10,6 +10,14 @@
   var givingMode = "monthly";
   var FUND = document.body.getAttribute("data-fund") || "general";
 
+  // Supabase Edge Functions cold-start a fresh isolate after a period of no
+  // traffic — the first real request can take several seconds, which reads
+  // as "the button doesn't do anything" even though it eventually works.
+  // Firing a cheap, side-effect-free OPTIONS ping as soon as the page loads
+  // pays that cold-start cost during the time a visitor spends reading the
+  // page, so by the time they actually click a tier the function is warm.
+  fetch(CHECKOUT_ENDPOINT, { method: "OPTIONS" }).catch(function () {});
+
   // Eases a number from 0 up to targetCents (rendered as a dollar figure)
   // over ~1.2s. Used by the campaign thermometer.
   function animateCountUp(el, targetCents) {
@@ -39,6 +47,14 @@
     setButtonsBusy(true);
     if (triggerBtn) triggerBtn.textContent = "Redirecting…";
 
+    // If the warm-up ping didn't finish in time and this request is genuinely
+    // slow (cold start), say so — a button stuck on "Redirecting…" with no
+    // change for several seconds reads as broken and invites people to give
+    // up and navigate away before the (eventually successful) redirect lands.
+    var slowNoticeTimer = setTimeout(function () {
+      if (triggerBtn) triggerBtn.textContent = "Still connecting…";
+    }, 3000);
+
     fetch(CHECKOUT_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -60,6 +76,7 @@
         }
       })
       .catch(function () {
+        clearTimeout(slowNoticeTimer);
         setButtonsBusy(false);
         if (triggerBtn && originalHTML) triggerBtn.innerHTML = originalHTML;
         window.alert(
