@@ -41,14 +41,22 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:18px 6
   .brand img{height:40px;}
 }
 
-/* FUND TOGGLE — General Fund / Teacher Support / Student Support */
-.fund-toggle{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:640px;margin:20px auto 0;padding:0 6%;}
-.fund-toggle a{border:1.5px solid var(--grey-line);background:#fdf6f2;color:var(--bronze);font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:0.3px;padding:9px 20px;border-radius:24px;text-decoration:none;transition:background 0.2s,color 0.2s,border-color 0.2s;white-space:nowrap;}
-.fund-toggle a:hover{border-color:var(--bronze-light);}
-.fund-toggle a.active{background:var(--red);border-color:var(--red);color:#fff;}
-@media(max-width:640px){
-  .fund-toggle{gap:6px;}
-  .fund-toggle a{padding:8px 14px;font-size:0.75rem;}
+/* FUND TOGGLE — General Fund / Teacher Support / Student Support.
+   Same sliding-pill mechanic as .giving-toggle, but the "position" is
+   fixed per page load (there's no live JS state — each option is a
+   real page) via a .pos-2/.pos-3 modifier on the container. */
+.fund-toggle{position:relative;display:flex;flex-wrap:nowrap;justify-content:center;gap:0;max-width:480px;margin:20px auto 0;background:#fdf6f2;border:1.5px solid var(--grey-line);border-radius:30px;padding:4px;}
+.fund-toggle-thumb{position:absolute;top:4px;left:4px;width:calc(33.333% - 2.667px);height:calc(100% - 8px);background:var(--red);border-radius:24px;transition:transform 0.35s cubic-bezier(0.65,0,0.35,1);z-index:0;}
+.fund-toggle.pos-2 .fund-toggle-thumb{transform:translateX(100%);}
+.fund-toggle.pos-3 .fund-toggle-thumb{transform:translateX(200%);}
+.fund-toggle a{position:relative;z-index:1;flex:1;min-width:0;border:none;background:none;padding:9px 10px;border-radius:24px;font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:0.2px;color:var(--bronze);cursor:pointer;transition:color 0.25s ease;text-align:center;text-decoration:none;line-height:1.25;}
+.fund-toggle a.active{color:#fff;}
+@media(prefers-reduced-motion:reduce){
+  .fund-toggle-thumb{transition:none;}
+}
+@media(max-width:480px){
+  .fund-toggle{max-width:340px;}
+  .fund-toggle a{font-size:0.7rem;padding:8px 6px;}
 }
 
 /* Monthly-only suffix — hidden in one-time giving mode */
