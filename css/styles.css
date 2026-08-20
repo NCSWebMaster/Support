@@ -4,7 +4,6 @@
   --bronze-light:#D9B48F;
   --gold:#FFC933;
   --gold-dark:#B8860B;
-  --gold-light:#FFF4C2;
   --ink:#3A2E2A;
   --grey-line:#E6E1DC;
 }
@@ -125,40 +124,22 @@ section{padding:70px 6%;}
 
 /* Legacy Circle ($1,000) — gold highlight, monthly giving only. In one-time
    mode it reverts to a regular card (see body.mode-onetime overrides below). */
-.tier-card.legacy{border-color:transparent;box-shadow:0 10px 26px rgba(255,201,51,0.4);animation:legacy-glow 3.5s ease-in-out infinite;}
+.tier-card.legacy{border-color:var(--gold);box-shadow:0 10px 26px rgba(255,201,51,0.4);animation:legacy-glow 3.5s ease-in-out infinite;}
 .tier-card.legacy .tier-cta{background:var(--gold);color:var(--ink);}
 .tier-card.legacy .tier-cta:hover{background:var(--gold-dark);}
 /* Reserve the same height as every other card's tier-name — the "Legacy Circle"
    label is never shown here (the ribbon carries it), keeping card height equal */
 .tier-card.legacy .tier-name .mode-text[data-mode="monthly"]{visibility:hidden;}
 
-/* Slow rotating conic-gradient "ring" behind the card, peeking out through the
-   3px inset as a shimmer that travels around the border. The card's own
-   opaque background covers the rest, so only the ring is visible. */
-.tier-card.legacy::before{
-  content:"";
-  position:absolute;
-  inset:-3px;
-  border-radius:16px;
-  background:conic-gradient(from 0deg,
-    var(--gold-dark), var(--gold), var(--gold-light), var(--gold),
-    var(--gold-dark), var(--gold), var(--gold-light), var(--gold),
-    var(--gold-dark));
-  z-index:-1;
-  animation:legacy-shimmer-spin 7s linear infinite;
-}
-@keyframes legacy-shimmer-spin{to{transform:rotate(360deg);}}
 @keyframes legacy-glow{
   0%,100%{box-shadow:0 10px 26px rgba(255,201,51,0.35);}
   50%{box-shadow:0 12px 34px rgba(255,201,51,0.65);}
 }
 @media(prefers-reduced-motion:reduce){
   .tier-card.legacy{animation:none;}
-  .tier-card.legacy::before{animation:none;}
 }
 
 body.mode-onetime .tier-card.legacy{border-color:var(--grey-line);box-shadow:0 3px 12px rgba(0,0,0,0.05);animation:none;}
-body.mode-onetime .tier-card.legacy::before{content:none;}
 body.mode-onetime .tier-card.legacy .tier-cta{background:var(--bronze);color:#fff;}
 body.mode-onetime .tier-card.legacy .tier-cta:hover{background:#96663d;}
 body.mode-onetime .tier-card.legacy .tier-ribbon{display:none;}
