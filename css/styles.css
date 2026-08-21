@@ -104,6 +104,15 @@ body.mode-onetime .mode-swap-inline .mode-text[data-mode="onetime"]{visibility:v
   .giving-toggle-thumb{transition:none;}
 }
 
+/* HERO PHOTO — the wide banner image at the top of each giving page,
+   shown as a rounded card above the fund toggle. */
+.hero-photo{max-width:1100px;margin:28px auto 0;padding:0 6%;}
+.hero-photo img{display:block;width:100%;height:auto;max-height:420px;object-fit:cover;border-radius:20px;box-shadow:0 14px 32px rgba(58,46,42,0.16);}
+@media(max-width:600px){
+  .hero-photo{margin-top:18px;}
+  .hero-photo img{max-height:240px;border-radius:14px;}
+}
+
 .page-header{text-align:center;padding:60px 6% 44px;background:linear-gradient(180deg,#fff 0%,#fdf6f2 100%);}
 .page-header .eyebrow{display:inline-block;color:var(--bronze);font-family:'Trebuchet MS',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
 .page-header h1{font-size:2.5rem;color:var(--red);margin-bottom:14px;}
